@@ -1,0 +1,12 @@
+.direnv
+.envrc
+shell.nix
+Rakefile
+.rake_tasks
+.rake_tasks~
+Dockerfile.my
+.vscode/
+.history/
+__debug_bin
+debug.test
+*eksctl.lock
