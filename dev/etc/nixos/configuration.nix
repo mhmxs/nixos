@@ -16,22 +16,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModprobeConfig = "options kvm_intel nested=1";
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   # Set your time zone.
   time.timeZone = "Europe/Budapest";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.eth0.useDHCP = true;
-  networking.interfaces.eth1.useDHCP = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -40,15 +26,8 @@
     keyMap = "uk";
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -57,15 +36,12 @@
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   security.sudo.wheelNeedsPassword = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mhmxs = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "libvirtd" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -84,9 +60,6 @@
     direnv
     nix-direnv
     cifs-utils
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  #   firefox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -107,11 +80,38 @@
     permitRootLogin = "no";
   };
 
+  networking.hostName = "nixos"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+
+  networking.extraHosts = ''
+    127.0.0.1 storageos.storageos.svc
+  '';
+
+  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+  # Per-interface useDHCP will be mandatory in the future, so this generated config
+  # replicates the default behaviour.
+  networking.useDHCP = false;
+  networking.interfaces.eth0.useDHCP = false;
+  networking.interfaces.eth0.ipv4.addresses = [{
+   address = "172.30.192.158";
+    prefixLength = 20;
+  }];
+  networking.interfaces.eth1.useDHCP = false;
+  networking.interfaces.eth1.ipv4.addresses = [{
+    address = "172.30.199.7";
+    prefixLength = 20;
+  }];
+  networking.defaultGateway = "172.30.192.1";
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -158,6 +158,4 @@
       };
     };
   };
-
 }
-
