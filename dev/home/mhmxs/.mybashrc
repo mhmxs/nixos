@@ -91,6 +91,10 @@ diffs() {
   diff -u $1 $2 | diff-so-fancy
 }
 
+elfpatch() {
+	nix-shell -p glibc patchelf --run "patchelf --set-interpreter $(find /nix/store -name ld-linux-x86-64.so.2 | head -1) $1"
+}
+
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
 

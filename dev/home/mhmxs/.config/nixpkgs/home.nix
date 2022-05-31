@@ -27,6 +27,7 @@
         pkgs.fzf
         pkgs.starship
         pkgs.ripgrep
+        pkgs.unzip
         pkgs.diff-so-fancy
         pkgs.lazydocker
         pkgs.colordiff
@@ -46,9 +47,7 @@
 
   programs.direnv = {
 	enable = true;
-	enableNixDirenvIntegration = true;
+	nix-direnv.enable = true;
 	enableBashIntegration = true;
   };
-  #programs.direnv.nix-direnv.enableFlakes = true;
-
 }

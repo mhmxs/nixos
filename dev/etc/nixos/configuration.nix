@@ -13,7 +13,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-intel" "uio" "tcm_loop" "target_core_mod" "target_core_user" ];
   boot.extraModprobeConfig = "options kvm_intel nested=1";
 
   # Set your time zone.
@@ -97,17 +97,12 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.eth0.useDHCP = false;
-  networking.interfaces.eth0.ipv4.addresses = [{
-   address = "172.30.192.158";
-    prefixLength = 20;
-  }];
-  networking.interfaces.eth1.useDHCP = false;
+  networking.interfaces.eth0.useDHCP = true;
   networking.interfaces.eth1.ipv4.addresses = [{
-    address = "172.30.199.7";
+    address = "10.0.0.2";
     prefixLength = 20;
   }];
-  networking.defaultGateway = "172.30.192.1";
+  # networking.defaultGateway = "10.0.0.1";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   # Configure network proxy if necessary
