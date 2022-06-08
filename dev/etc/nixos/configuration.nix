@@ -91,6 +91,7 @@
 
   networking.extraHosts = ''
     127.0.0.1 storageos.storageos.svc
+    127.0.0.1 vault.loc
   '';
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -154,4 +155,10 @@
       };
     };
   };
+
+  system.activationScripts.nonposix.text = ''
+    ln -sf /run/current-system/sw/bin/bash /bin/bash
+    rm -rf /lib64 ; ln -sf /run/current-system/sw/lib /lib64
+    rm -rf /lib ; ln -sf /run/current-system/kernel-modules/lib /lib
+  '';
 }
