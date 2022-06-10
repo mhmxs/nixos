@@ -90,7 +90,7 @@ diffs() {
 }
 
 elfpatch() {
-	nix-shell -p glibc patchelf --run "patchelf --set-interpreter $(find /nix/store -name ld-linux-x86-64.so.2 | grep glibc | tail -1) $1"
+	nix-shell -p glibc patchelf --run "patchelf --set-interpreter '$(nix eval --raw -f \<nixpkgs\> glibc.outPath)/lib/ld-linux-x86-64.so.2' $1"
 }
 
 export KUBECONFIG=/home/mhmxs/src/github.com/ondat/kubecover/kind-kubeconfig.yaml
