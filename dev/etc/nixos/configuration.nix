@@ -26,7 +26,11 @@
     keyMap = "uk";
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    autoPrune.enable = true;
+    enable = true;
+    enableOnBoot = true;
+  };
   virtualisation.libvirtd.enable = true;
 
   # Enable CUPS to print documents.
@@ -120,7 +124,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 
   fileSystems."/mnt/readynas" = {
     device = "192.168.3.104:/media/wd/data";
@@ -165,4 +169,11 @@
     rm -rf /lib64 ; ln -sf /run/current-system/sw/lib /lib64
     rm -rf /lib ; ln -sf /run/current-system/kernel-modules/lib /lib
   '';
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+   };
 }
