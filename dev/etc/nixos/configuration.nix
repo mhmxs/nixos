@@ -56,6 +56,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     glibc
+    gcc
     vim
     mc
     file
@@ -164,10 +165,13 @@
     };
   };
 
+  environment.variables = {
+    LD_LIBRARY_PATH = "$(cat ${pkgs.gcc.outPath}/nix-support/cc-ldflags | cut -dL -f2 | tr -cd '[:print:]'):/run/current-system/sw/lib:/run/current-system/kernel-modules/lib";
+  };
+
   system.activationScripts.nonposix.text = ''
     ln -sf /run/current-system/sw/bin/bash /bin/bash
-    rm -rf /lib64 ; ln -sf /run/current-system/sw/lib /lib64
-    rm -rf /lib ; ln -sf /run/current-system/kernel-modules/lib /lib
+    rm -rf /lib64 ; mkdir /lib64 ; ln -sf ${pkgs.glibc.outPath}/lib/ld-linux-x86-64.so.2 /lib64
   '';
 
   nix = {

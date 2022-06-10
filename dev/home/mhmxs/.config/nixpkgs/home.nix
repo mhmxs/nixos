@@ -39,6 +39,13 @@
     pkgs.azure-cli
   ];
 
+  programs.vim = {
+    enable = true;
+    extraConfig = ''
+      set mouse-=a
+    '';
+  };
+
   programs.bash = {
     enable = true;
     sessionVariables = {
