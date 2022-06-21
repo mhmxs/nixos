@@ -166,7 +166,7 @@
   };
 
   environment.variables = {
-    LD_LIBRARY_PATH = "$(cat ${pkgs.gcc.outPath}/nix-support/cc-ldflags | cut -dL -f2 | tr -cd '[:print:]'):/run/current-system/sw/lib:/run/current-system/kernel-modules/lib";
+    LD_LIBRARY_PATH = "$(cat ${pkgs.gcc.outPath}/nix-support/cc-ldflags | cut -dL -f2 | sed 's/.$//'):/run/current-system/sw/lib:/run/current-system/kernel-modules/lib";
   };
 
   system.activationScripts.nonposix.text = ''
