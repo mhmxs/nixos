@@ -13,7 +13,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = [ "kvm-intel" "uio" "tcm_loop" "target_core_mod" "target_core_user" ];
+  boot.kernelModules = [ "overlay" "kvm-intel" "uio" "tcm_loop" "target_core_mod" "target_core_user" ];
   boot.extraModprobeConfig = "options kvm_intel nested=1";
 
   # Set your time zone.
@@ -100,7 +100,6 @@
 
   networking.extraHosts = ''
     127.0.0.1 storageos.storageos.svc
-    127.0.0.1 vault.loc
   '';
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
