@@ -20,3 +20,14 @@ _backup() {
     echo "duplicity list-current-files $TARGET | less"
 }
 alias backup=_backup
+
+cleanup() {
+    docker rm -f $(docker ps -qa)
+    docker system prune -a -f
+    nix-store --optimise
+    nix-collect-garbage --delete-old
+
+    for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/mod/; done
+
+    df -h
+}
