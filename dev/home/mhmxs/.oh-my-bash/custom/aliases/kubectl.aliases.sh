@@ -6,6 +6,7 @@ alias kgall='_kgall'
 
 _kcc() {
   if [[ -z $1 ]]; then
+    echo "24 -> v1.24.2"
     echo "23 -> v1.23.0"
     echo "22 -> v1.22.3"
     echo "21 -> v1.21.0"
@@ -20,6 +21,9 @@ _kcc() {
   fi
 
   case $kn in
+    24)
+	ki=storageos/kind-node:v1.24.2
+	;;
     23)
       ki=storageos/kind-node:v1.23.0
     ;;
