@@ -24,8 +24,14 @@ alias backup=_backup
 cleanup() {
     docker rm -f $(docker ps -qa)
     docker system prune -a -f
+    docker volume ls -qf dangling=true | xargs -r docker volume rm
     nix-store --optimise
     nix-collect-garbage --delete-old
+
+    PATH=/home/mhmxs/src/github.com/ondat/kubecover/envsetup/bin:$PATH
+
+    for v in `sudo ignite vm -q`; do sudo ignite rm vm $v; done
+    for v in `sudo ignite image -q`; do sudo ignite image rm $v; done
 
     for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/mod/; done
 
