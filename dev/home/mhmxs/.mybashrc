@@ -103,7 +103,7 @@ for o in storageos ondat; do
   done
 done
 
-for o in storageos tool; do
+for o in tool; do
   for p in `ls ~/src/code.storageos.net/$o`; do
     alias cd-$p="cd ~/src/code.storageos.net/$o/$p"
   done

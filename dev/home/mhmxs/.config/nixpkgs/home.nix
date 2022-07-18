@@ -17,6 +17,7 @@
     pkgs.tunnelto
     pkgs.k9s
     pkgs.krew
+    pkgs.datree
     pkgs.kube-capacity
     pkgs.rake
     pkgs.gh

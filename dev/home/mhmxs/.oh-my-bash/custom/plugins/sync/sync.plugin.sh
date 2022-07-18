@@ -35,5 +35,7 @@ cleanup() {
 
     for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/mod/; done
 
+    find src -type d -name .git -exec bash -c 'cd {}/.. ; git gc' \;
+
     df -h
 }
