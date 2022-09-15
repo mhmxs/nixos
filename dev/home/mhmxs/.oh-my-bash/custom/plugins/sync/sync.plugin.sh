@@ -25,8 +25,9 @@ cleanup() {
     docker rm -f $(docker ps -qa)
     docker system prune -a -f
     docker volume ls -qf dangling=true | xargs -r docker volume rm
-    nix-store --optimise
+    sudo nix-store --optimise
     nix-collect-garbage --delete-old
+    sudo nix-collect-garbage --delete-old
 
     PATH=/home/mhmxs/src/github.com/ondat/kubecover/envsetup/bin:$PATH
 

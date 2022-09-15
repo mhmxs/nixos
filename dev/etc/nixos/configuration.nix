@@ -41,6 +41,7 @@
   # hardware.pulseaudio.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
+  security.polkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mhmxs = {
