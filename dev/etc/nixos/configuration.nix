@@ -99,7 +99,7 @@
   networking.firewall.enable = false;
 
   networking.extraHosts = ''
-    127.0.0.1 storageos.storageos.svc
+    127.0.0.1 storageos.storageos.svc storageos
   '';
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
