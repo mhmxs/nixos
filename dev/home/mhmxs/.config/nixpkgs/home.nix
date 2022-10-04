@@ -7,6 +7,7 @@
   home.homeDirectory = "/home/mhmxs";
 
   home.packages = [
+    pkgs.bind
     pkgs.lsof
     pkgs.go_1_18
     pkgs.nodejs-16_x
