@@ -60,7 +60,7 @@ _kcc() {
 	kind create cluster --image=$ki
 }
 alias kcc="_kcc"
-alias kdc="kind delete cluster"
+alias kdc="sh -c '(kubectl delete stos -n storageos storageoscluster ||:) && kind delete cluster'"
 
 # This command is used a LOT both below and in daily life
 alias k=kubectl
