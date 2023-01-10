@@ -7,6 +7,7 @@
   home.homeDirectory = "/home/mhmxs";
 
   home.packages = [
+    pkgs.vagrant
     pkgs.openvpn
     pkgs.tinyproxy
     pkgs.bind
