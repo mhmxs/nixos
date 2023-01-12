@@ -93,8 +93,6 @@ elfpatch() {
 	nix-shell -p glibc patchelf --run "patchelf --set-interpreter '$(nix eval --raw -f \<nixpkgs\> glibc.outPath)/lib/ld-linux-x86-64.so.2' $1"
 }
 
-export GOROOT=~/go
-
 export KUBECONFIG=/home/mhmxs/src/github.com/ondat/kubecover/kind-kubeconfig.yaml
 
 export S=storageos

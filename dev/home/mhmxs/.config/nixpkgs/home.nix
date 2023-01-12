@@ -57,7 +57,7 @@
     sessionVariables = {
       EDITOR = "vim";
       DOCKER_BUILDKIT = "1";
-      GOPATH = "$HOME/.go/1_18";
+      GOROOT = "$HOME/go";
     };
     shellAliases = {
       ls = "lsd";
