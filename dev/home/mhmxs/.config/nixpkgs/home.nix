@@ -1,5 +1,5 @@
 { pkgs, ...}: {
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   programs.home-manager.enable = true;
 
@@ -7,12 +7,12 @@
   home.homeDirectory = "/home/mhmxs";
 
   home.packages = [
-    pkgs.vagrant
+    pkgs.krunvm
+    pkgs.buildah
     pkgs.openvpn
     pkgs.tinyproxy
     pkgs.bind
     pkgs.lsof
-    pkgs.go_1_18
     pkgs.nodejs-16_x
     pkgs.gcc
     pkgs.gnumake
@@ -23,7 +23,6 @@
     pkgs.tunnelto
     pkgs.k9s
     pkgs.krew
-    pkgs.datree
     pkgs.kube-capacity
     pkgs.rake
     pkgs.gh
@@ -32,7 +31,6 @@
     pkgs.jq
     pkgs.tldr
     pkgs.lsd
-    pkgs.bat
     pkgs.fzf
     pkgs.starship
     pkgs.ripgrep
@@ -74,7 +72,7 @@
 
   home.sessionPath = [
     "/usr/local/bin"
-    "$HOME/.go/1_18/bin"
+    "$HOME/go/bin"
     "$HOME/.krew/bin"
   ];
 
