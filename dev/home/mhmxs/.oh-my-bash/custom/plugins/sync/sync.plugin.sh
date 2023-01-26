@@ -26,7 +26,6 @@ cleanup() {
     docker system prune -a -f
     docker volume ls -qf dangling=true | xargs -r docker volume rm
     sudo nix-store --optimise
-    nix-collect-garbage --delete-old
     sudo nix-collect-garbage --delete-old
 
     PATH=/home/mhmxs/src/github.com/ondat/kubecover/envsetup/bin:$PATH
@@ -36,6 +35,8 @@ cleanup() {
 
     for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/; done
 
+    rm -rf $HOME/.vagrant.d/boxes
+    
     rm -rf $HOME/.cache
 
     find src -type d -name .git -exec bash -c 'cd {}/.. ; git gc' \;

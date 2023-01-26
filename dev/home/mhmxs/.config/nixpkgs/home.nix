@@ -9,6 +9,7 @@
   home.packages = [
     pkgs.krunvm
     pkgs.buildah
+    pkgs.vagrant
     pkgs.openvpn
     pkgs.tinyproxy
     pkgs.bind
@@ -21,6 +22,7 @@
     pkgs.kubectl
     pkgs.kind
     pkgs.tunnelto
+    pkgs.nerdctl
     pkgs.k9s
     pkgs.krew
     pkgs.kube-capacity
@@ -57,7 +59,7 @@
     sessionVariables = {
       EDITOR = "vim";
       DOCKER_BUILDKIT = "1";
-      GOROOT = "$HOME/go";
+      GOPATH = "$HOME/go";
     };
     shellAliases = {
       ls = "lsd";

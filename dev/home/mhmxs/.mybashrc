@@ -93,11 +93,15 @@ elfpatch() {
 	nix-shell -p glibc patchelf --run "patchelf --set-interpreter '$(nix eval --raw -f \<nixpkgs\> glibc.outPath)/lib/ld-linux-x86-64.so.2' $1"
 }
 
+sudoe(){
+    eval sudo $(for x in $(env | grep = | cut -d= -f1); do printf '%q=%q ' "$x" "${!x}"; done;) "$@"
+}
+
 export KUBECONFIG=/home/mhmxs/src/github.com/ondat/kubecover/kind-kubeconfig.yaml
 
 export S=storageos
 
-for o in storageos ondat; do
+for o in storageos ondat kubernetes; do
   for p in `ls ~/src/github.com/$o`; do
     alias cd-$p="cd ~/src/github.com/$o/$p"
   done

@@ -31,8 +31,9 @@
     enable = true;
     enableOnBoot = true;
   };
+  virtualisation.containerd.enable = true;
   virtualisation.libvirtd.enable = true;
-  # virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
