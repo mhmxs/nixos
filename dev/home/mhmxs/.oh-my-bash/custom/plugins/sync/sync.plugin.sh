@@ -35,6 +35,12 @@ cleanup() {
 
     for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/; done
 
+    rm -rf $HOME/.kube/cache
+    
+    sudo rm -rf $HOME/.local/share/kubebuilder-envtest
+
+    sudo rm -rf $HOME/src/github.com/kubernetes/kubernetes/_output/local/go/cache
+
     rm -rf $HOME/.vagrant.d/boxes
     
     rm -rf $HOME/.cache

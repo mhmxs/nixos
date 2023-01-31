@@ -59,7 +59,6 @@
     sessionVariables = {
       EDITOR = "vim";
       DOCKER_BUILDKIT = "1";
-      GOPATH = "$HOME/go";
     };
     shellAliases = {
       ls = "lsd";
@@ -74,7 +73,7 @@
 
   home.sessionPath = [
     "/usr/local/bin"
-    "$HOME/go/bin"
+    "/home/mhmxs/go/bin"
     "$HOME/.krew/bin"
   ];
 
