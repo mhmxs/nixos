@@ -89,6 +89,10 @@ diffs() {
   diff -u $1 $2 | diff-so-fancy
 }
 
+home-manager() {
+	nix-shell -p home-manager --run "home-manager $@"
+}
+
 elfpatch() {
 	nix-shell -p glibc patchelf --run "patchelf --set-interpreter '$(nix eval --raw -f \<nixpkgs\> glibc.outPath)/lib/ld-linux-x86-64.so.2' $1"
 }

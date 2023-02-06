@@ -33,7 +33,7 @@ cleanup() {
     for v in `sudo ignite vm -q`; do sudo ignite rm vm $v; done
     for v in `sudo ignite image -q`; do sudo ignite image rm $v; done
 
-    for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/mod; done
+    # for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/mod; done
 
     rm -rf $HOME/.kube/cache
     

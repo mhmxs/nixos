@@ -7,8 +7,6 @@
   home.homeDirectory = "/home/mhmxs";
 
   home.packages = [
-    pkgs.krunvm
-    pkgs.buildah
     pkgs.vagrant
     pkgs.openvpn
     pkgs.tinyproxy
