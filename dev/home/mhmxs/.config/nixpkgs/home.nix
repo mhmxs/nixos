@@ -21,6 +21,7 @@
     pkgs.kind
     pkgs.tunnelto
     pkgs.nerdctl
+    pkgs.cri-tools
     pkgs.k9s
     pkgs.krew
     pkgs.kube-capacity

@@ -22,9 +22,13 @@ _backup() {
 alias backup=_backup
 
 cleanup() {
+    sudo nerdctl system prune --all
+    sudo crictl --runtime-endpoint /run/containerd/containerd.sock rmi --prune
+
     docker rm -f $(docker ps -qa)
     docker system prune -a -f
     docker volume ls -qf dangling=true | xargs -r docker volume rm
+    
     sudo nix-store --optimise
     sudo nix-collect-garbage --delete-old
 
@@ -33,12 +37,11 @@ cleanup() {
     for v in `sudo ignite vm -q`; do sudo ignite rm vm $v; done
     for v in `sudo ignite image -q`; do sudo ignite image rm $v; done
 
-    # for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/mod; done
+    for v in `ls ~/.go`; do sudo rm -rf .go/$v/pkg/mod/github.com; done
 
     rm -rf $HOME/.kube/cache
     
     sudo rm -rf $HOME/.local/share/kubebuilder-envtest
-
     sudo rm -rf $HOME/src/github.com/kubernetes/kubernetes/_output/local/go/cache
 
     sudo rm -rf /tmp/*

@@ -72,6 +72,8 @@
     direnv
     nix-direnv
     cifs-utils
+    conntrack-tools
+    tcpdump
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

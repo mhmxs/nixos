@@ -1,3 +1,62 @@
+debug() {
+  : ${NS:=default}
+
+  cat <<EOFI | kubectl apply -f -
+apiVersion: apps/v1
+kind: DaemonSet 
+metadata:
+  labels:
+    app: debug
+  name: debug
+  namespace: ${NS}
+spec:
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+    spec:
+      # hostNetwork: true
+      containers:
+      - image: nixery.dev/shell/unixtools.ping/dig/etcd/iproute2/mtr/curl
+        command:
+        - sleep
+        - infinity
+        name: debug
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/readiness
+EOFI
+}
+
+nginx() {
+  : ${NN:=0}
+  : ${NS:=default}
+
+  kubectl create deploy --image nginx nginx${NN}
+    cat <<EOFI | kubectl apply -f -
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx${NN}
+  namespace: ${NS}
+  labels:
+    app: nginx${NN}
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 3100${NN}
+    protocol: TCP
+  selector:
+    app: nginx${NN}
+EOFI
+}
+
 _kgall() {
 	: ${1?= namespace required}
 	for a in `kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq`; do echo --- $a ---; kubectl get -n $1 $a 2>/dev/null; done
