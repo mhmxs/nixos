@@ -28,7 +28,9 @@ cleanup() {
     docker rm -f $(docker ps -qa)
     docker system prune -a -f
     docker volume ls -qf dangling=true | xargs -r docker volume rm
-    
+
+    sudo rm -rf /var/lib/docker/volumes/earthly-cache
+
     sudo nix-store --optimise
     sudo nix-collect-garbage --delete-old
 
